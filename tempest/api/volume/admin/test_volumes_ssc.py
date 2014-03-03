@@ -15,13 +15,8 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-#import ConfigParser
-#import MySQLdb
 import testtools
 import time
-
-
-
 
 from tempest.common.utils import data_utils
 #from tempest.api.volume.base import BaseVolumeTest
