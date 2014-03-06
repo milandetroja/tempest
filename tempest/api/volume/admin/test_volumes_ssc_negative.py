@@ -48,12 +48,10 @@ class NetAppSSCNegativeTest(base.BaseVolumeV1AdminTest):
             volume_status = body['status']
 
     @attr(type=['negative','gate'])
-    def _ssc_test(self, name, expected_vol, **kwargs):
+    def _ssc_test(self, name, **kwargs):
         """ Base ssc test method
 
         @param name: String, name of the volume-type
-        @param expected_vol: String, name of the NetApp volume you expect the
-            cinder volume to be created on
         @param **kwargs: Dict, the extra specs for the volume type,
             in ssc's case, the NetApp attributes
         """
@@ -90,83 +88,69 @@ class NetAppSSCNegativeTest(base.BaseVolumeV1AdminTest):
     def test_ssc_netapp_mirrored(self):
         ''' Test netapp_mirrored '''
         self._ssc_test('vol-type-mirrored',
-                       'mirrored',
                        **{'netapp_unmirrored': 'true'})
 
     def test_ssc_netapp_dedup(self):
         ''' Test netapp_dedup '''
         self._ssc_test('vol-type-dedup',
-                       'dedup',
                        **{'netapp_nodedupe': 'true'})
 
     def test_ssc_netapp_compressed(self):
         ''' Test netapp_compressed '''
         self._ssc_test('vol-type-compressed',
-                       'compressed',
                        **{'netapp_nocompression': 'true'})
 
     def test_ssc_netapp_thin_provisioned(self):
         ''' Test netapp_thin_provisioned '''
         self._ssc_test('vol-type-thin',
-                       'openstack',
-                       **{'netapp_thin_provisioned': 'true'})
+                       **{'netapp_thick_provisioned': 'true'})
 
     def test_ssc_netapp_thick_provisioned(self):
         ''' Test netapp_thick_provisioned '''
         self._ssc_test('vol-type-thick',
-                       'compressed',
-                       **{'netapp_thick_provisioned': 'true'})
+                       **{'netapp_thin_provisioned': 'true'})
 
     def test_ssc_netapp_raid_dp(self):
         ''' Test netapp_raidDP '''
         self._ssc_test('vol-type-raid_dp',
-                       'openstack',
                        **{'netapp:raid_type': 'raid_dp'})
 
     def test_ssc_netapp_raid4(self):
         ''' Test netapp_raid4 '''
         self._ssc_test('vol-type-raid4',
-                       'raid4',
                         **{'netapp:raid_type':'raid4'})
 
     def test_ssc_netapp_sas_disk(self):
         ''' Test netapp_sas_disk '''
         self._ssc_test('vol-type-sas',
-                       'sasDisk',
                        **{'netapp:disk_type':'SATA'})
 
     def test_ssc_netapp_sata_disk(self):
         ''' Test netapp_sata_disk '''
         self._ssc_test('vol-type-sata',
-                       'sataDisk',
                        **{'netapp:disk_type':'SATA'})
 
     def test_ssc_netapp_ssd_disk(self):
         ''' Test netapp_ssd_disk '''
         self._ssc_test('vol-type-ssd',
-                       'ssdDisk',
                        **{'netapp:disk_type':'SSD'})
 
     def test_ssc_netapp_qos_policy(self):
         ''' Test netapp_qos_policy '''
         self._ssc_test('vol-type-qos',
-                       'QOS',
                        **{'netapp:qos_policy_group': 'p2'})
 
     def test__ssc_netapp_mixed_unqualified(self):
         ''' Test test_ssc_netapp_mixed_unqualified '''
         self._ssc_test('vol-type-mixunqual',
-                       'mixed_unqual',
                        **{'netapp_thin_provisioned': 'true','netapp_nocompression': 'true','netapp_nodedupe': 'true'})
 
     def test_ssc_netapp_mixed_qualified(self):
         ''' Test test_ssc_netapp_mixed_qualified '''
         self._ssc_test('vol-type-mixqual',
-                       'mix_qual',
                        **{'netapp:disk_type':'SATA','netapp:raid_type': 'raid_dp'})
 
     def test_ssc_netapp_mixed(self):
         ''' Test test_ssc_netapp_mixed '''
         self._ssc_test('vol-type-mixed',
-                       'mixed',
                        **{'netapp_thin_provisioned': 'true','netapp_nocompression': 'true','netapp_nodedupe': 'true','netapp:raid_type': 'raid_dp'})
