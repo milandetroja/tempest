@@ -103,12 +103,12 @@ class NetAppSSCNegativeTest(base.BaseVolumeV1AdminTest):
     def test_ssc_netapp_thin_provisioned(self):
         ''' Test netapp_thin_provisioned '''
         self._ssc_test('vol-type-thin',
-                       **{'netapp_thick_provisioned': 'true'})
+                       **{'netapp_thin_provisioned': 'false'})
 
     def test_ssc_netapp_thick_provisioned(self):
         ''' Test netapp_thick_provisioned '''
         self._ssc_test('vol-type-thick',
-                       **{'netapp_thin_provisioned': 'true'})
+                       **{'netapp_thick_provisioned': 'false'})
 
     def test_ssc_netapp_raid_dp(self):
         ''' Test netapp_raidDP '''
