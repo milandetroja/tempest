@@ -85,20 +85,35 @@ class NetAppSSCNegativeTest(base.BaseVolumeV1AdminTest):
         volume_status = body['status']
         self.assertEqual('error',volume_status)
 
+    def test_ssc_netapp_unmirrored(self):
+        ''' Test netapp_unmirrored '''
+        self._ssc_test('vol-type-unmirrored',
+                       **{'netapp_unmirrored': 'true'})
+
     def test_ssc_netapp_mirrored(self):
         ''' Test netapp_mirrored '''
         self._ssc_test('vol-type-mirrored',
-                       **{'netapp_unmirrored': 'true'})
+                       **{'netapp_mirrored': 'true'})
+
+    def test_ssc_netapp_nodedup(self):
+        ''' Test netapp_nodedup '''
+        self._ssc_test('vol-type-nodedup',
+                       **{'netapp_nodedupe': 'true'})
 
     def test_ssc_netapp_dedup(self):
         ''' Test netapp_dedup '''
         self._ssc_test('vol-type-dedup',
-                       **{'netapp_nodedupe': 'true'})
+                       **{'netapp_dedup': 'true'})
+
+    def test_ssc_netapp_nocompressed(self):
+        ''' Test netapp_nocompressed '''
+        self._ssc_test('vol-type-nocompressed',
+                       **{'netapp_nocompression': 'true'})
 
     def test_ssc_netapp_compressed(self):
         ''' Test netapp_compressed '''
         self._ssc_test('vol-type-compressed',
-                       **{'netapp_nocompression': 'true'})
+                       **{'netapp_compression': 'true'})
 
     def test_ssc_netapp_thin_provisioned(self):
         ''' Test netapp_thin_provisioned '''
